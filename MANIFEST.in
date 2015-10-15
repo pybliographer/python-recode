@@ -1,3 +1,3 @@
 include *.[ch]
-include setup.py README NEWS
+include setup.py README.rst NEWS
 include testsuite.py
