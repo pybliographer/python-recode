@@ -58,3 +58,9 @@ gcc (gcc-3.3.2 seems to trigger this problem). You can recompile
 recode with the following option for configure:
 
     CFLAGS=-g ./configure --prefix=...
+
+Credits
+-------
+
+Frédéric Gobry, the original author of python-bibtex, which included
+an internal module with a simple binding to GNU Recode.

@@ -1,81 +1,36 @@
 # -*- python -*-
+# -*- coding: utf-8 -*-
 
-import os
-import sys
-
-from distutils.core import setup, Extension, Command
-from distutils.errors import DistutilsExecError
-from distutils.command.install import install as base_install
+from setuptools import setup, Extension
 
 version = '1.2.7'
 
 
-def error(msg):
-    sys.stderr.write('setup.py: error: %s\n' % msg)
-
-
-class run_check (Command):
-    """ Run all of the tests for the package using uninstalled (local)
-    files """
-
-    description = "Automatically run the test suite for the package."
-    user_options = []
-
-    def initialize_options(self):
-        self.build_lib = None
-
-    def finalize_options(self):
-        # Obtain the build_lib directory from the build command
-        self.set_undefined_options('build', ('build_lib', 'build_lib'))
-
-    def run(self):
-        # Ensure the extension is built
-        self.run_command('build')
-
-        # test the uninstalled extensions
-        libdir = os.path.join(os.getcwd(), self.build_lib)
-        sys.path.insert(0, libdir)
-
-        import testsuite
-
-        try:
-            failures = testsuite.run()
-
-        except RuntimeError, msg:
-            sys.stderr.write('error: %s\n' % msg)
-            raise DistutilsExecError('please consult the "Troubleshooting" '
-                                     'section in the README file.')
-
-        if failures > 0:
-            raise DistutilsExecError('check failed.')
-
-
-class run_install(base_install):
-    def run(self):
-        # The code must pass the tests before being installed
-        self.run_command('check')
-        base_install.run(self)
-
-
-# Actual compilation
-
-setup(name="python-recode",
+setup(name='python-recode',
       version=version,
-
-      description="A Python extension to recode files",
-      author="Frederic Gobry",
+      description='A Python extension to recode text files',
+      author='Frederic Gobry',
       author_email='gobry@pybliographer.org',
-      url='http://pybliographer.org/',
+      maintainer="Germán Poo-Caamaño",
+      maintainer_email='gpoo@gnome.org',
+      url='https://github.com/pybliographer/python-recode',
       license='GPL',
-      cmdclass={'check':   run_check,
-                'install': run_install},
       long_description='''
 This module contains a simple binding to GNU Recode.
 
-It requires the GNU Recode 3.5 and its development header.
+It requires the GNU Recode and its development header.
 
 ''',
+      classifiers=[
+          'Development Status :: 3 - Alpha',
+          'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+          'Topic :: Text Processing :: Filters',
+          'Programming Language :: Python :: 2',
+          'Programming Language :: Python :: 2.6',
+          'Programming Language :: Python :: 2.7',
+      ],
+      keywords='recode text-processing',
       ext_modules=[
-          Extension("recode", ["recodemodule.c"],
+          Extension('recode', ['recodemodule.c'],
                     libraries=['recode'])
       ])
