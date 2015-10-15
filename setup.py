@@ -3,7 +3,7 @@
 
 from setuptools import setup, Extension
 
-version = '1.2.7'
+version = '0.1'
 
 
 setup(name='python-recode',
