@@ -1,9 +1,10 @@
-/*
+/* -*- coding: utf-8 -*- */
+/* 
  This file is part of pybliographer
- 
- Copyright (C) 1998-1999 Frederic GOBRY
- Email : gobry@idiap.ch
- 	   
+
+ Copyright (C) 1998-1999 Frederic GOBRY <gobry@idiap.ch>
+ Copyright (C) 2014-2015 Germán Poo-Caamaño <gpoo@gnome.org>
+
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
  as published by the Free Software Foundation; either version 2 
@@ -123,7 +124,7 @@ py_new_recoder (PyObject * self, PyObject * args) {
 }
 
 static PyObject *
-py_recode (PyObject * self, PyObject * args) {
+pyrecode (PyObject * self, PyObject * args) {
     char * string;
     int length;
 
@@ -157,21 +158,21 @@ py_recode (PyObject * self, PyObject * args) {
 
 static PyMethodDef recodeMeth [] = {
     { "request", py_new_recoder, METH_VARARGS },
-    { "recode", py_recode, METH_VARARGS },
+    { "recode", pyrecode, METH_VARARGS },
     {NULL, NULL, 0},
 };
 
 
-void init_recode (void)
+void initrecode (void)
 {
     PyRecodeRequest_Type.ob_type = & PyType_Type;
 
     outer = recode_new_outer (true);
     if (outer == NULL) {
-	fprintf (stderr, "_recode: error: cannot initialize outer interface.\n");
+	fprintf (stderr, "recode: error: cannot initialize outer interface.\n");
 	return;
     }
 
-    (void) Py_InitModule ("_recode", recodeMeth);
+    (void) Py_InitModule ("recode", recodeMeth);
 }
 
