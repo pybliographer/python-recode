@@ -2,7 +2,7 @@ Python Recode
 =============
 
 This python extension contains a simple binding to the GNU Recode library.
-This module requires GNU Recode 3.5 and its development headers.
+This module requires GNU Recode and its development headers.
 
 
 Compilation

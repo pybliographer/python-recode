@@ -8,7 +8,7 @@ version = '0.1'
 
 setup(name='python-recode',
       version=version,
-      description='A Python extension to recode text files',
+      description='A Python extension to convert files between character sets',
       author='Frederic Gobry',
       author_email='gobry@pybliographer.org',
       maintainer="Germán Poo-Caamaño",
@@ -16,7 +16,8 @@ setup(name='python-recode',
       url='https://github.com/pybliographer/python-recode',
       license='GPL',
       long_description='''
-This module contains a simple binding to GNU Recode.
+This module contains a simple binding to GNU Recode, a library to
+convert text and files between character sets.
 
 It requires the GNU Recode and its development header.
 
